@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1300, initial-scale=0.35, maximum-scale=2.0">
+  <title>SOLITARY HACKER | Cyber Portfolio</title>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Fira+Code:wght@400;700&display=swap" rel="stylesheet">
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    /* Global Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Share Tech Mono', 'Fira Code', monospace;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: #020803;
+      color: #00ff66;
+      min-height: 100vh;
+      overflow-x: auto;
+      padding-bottom: 40px;
+      position: relative;
+    }
+
+    /* Matrix Canvas Background Fixed */
+    #matrix {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      opacity: 0.35;
+      pointer-events: none;
+    }
+
+    /* Desktop Fixed Container */
+    .container {
+      width: 1250px;
+      margin: 0 auto;
+      padding: 0 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Navigation Bar */
+    navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 0;
+      border-bottom: 1px solid rgba(0, 255, 102, 0.3);
+      background: rgba(2, 8, 3, 0.8);
+    }
+
+    .brand-logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #00ff66;
+      text-shadow: 0 0 10px #00ff66;
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 30px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: #a3ffcb;
+      text-decoration: none;
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      transition: 0.3s;
+    }
+
+    .nav-links a:hover, .nav-links a.active {
+      color: #00ff66;
+      text-shadow: 0 0 8px #00ff66;
+      border-bottom: 2px solid #00ff66;
+    }
+
+    .btn-terminal {
+      border: 1px solid #00ff66;
+      padding: 8px 18px;
+      border-radius: 4px;
+      color: #00ff66;
+      text-decoration: none;
+      font-size: 0.85rem;
+      transition: 0.3s;
+      box-shadow: inset 0 0 5px rgba(0,255,102,0.2);
+    }
+
+    .btn-terminal:hover {
+      background: #00ff66;
+      color: #000;
+      box-shadow: 0 0 15px #00ff66;
+    }
+
+    /* Top Main Hero Section Grid */
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.3fr 1fr;
+      gap: 30px;
+      margin: 40px 0;
+      align-items: center;
+    }
+
+    /* Profile Header Left Side (Big Image + Name) */
+    .profile-left-box {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+    }
+
+    /* Big Round Image Updated Size */
+    .profile-img-large {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      border: 4px solid #00ff66;
+      box-shadow: 0 0 25px #00ff66;
+      object-fit: cover;
+      flex-shrink: 0;
+    }
+
+    .hero-left-text h2 {
+      font-size: 1.8rem;
+      color: #fff;
+      letter-spacing: 2px;
+    }
+
+    .hero-left-text h1 {
+      font-size: 3.2rem;
+      color: #00ff66;
+      text-shadow: 0 0 18px rgba(0,255,102,0.8);
+      margin: 5px 0;
+      line-height: 1;
+    }
+
+    .hero-tags {
+      font-size: 0.95rem;
+      color: #a3ffcb;
+      margin-bottom: 15px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 12px;
+    }
+
+    .btn-solid {
+      background: #00ff66;
+      color: #000;
+      padding: 10px 20px;
+      border-radius: 4px;
+      font-weight: bold;
+      text-decoration: none;
+      box-shadow: 0 0 12px #00ff66;
+      transition: 0.3s;
+    }
+
+    .btn-solid:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 20px #00ff66;
+    }
+
+    .btn-outline {
+      border: 1px solid #00ff66;
+      color: #00ff66;
+      padding: 10px 20px;
+      border-radius: 4px;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    .btn-outline:hover {
+      background: rgba(0, 255, 102, 0.1);
+      box-shadow: 0 0 10px #00ff66;
+    }
+
+    /* Card Boxes General Style */
+    .card-box {
+      border: 1px solid rgba(0, 255, 102, 0.4);
+      background: rgba(2, 12, 4, 0.85);
+      padding: 25px;
+      border-radius: 8px;
+      position: relative;
+      box-shadow: 0 0 15px rgba(0, 255, 102, 0.1);
+    }
+
+    .card-box h3 {
+      font-size: 1.15rem;
+      margin-bottom: 20px;
+      border-bottom: 1px solid rgba(0,255,102,0.3);
+      padding-bottom: 10px;
+      color: #00ff66;
+      text-shadow: 0 0 5px #00ff66;
+    }
+
+    /* About Me Content Right Side */
+    .about-card-content p {
+      font-size: 0.95rem;
+      color: #a3ffcb;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    /* Middle Grid (What I Do & Skills) */
+    .mid-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      margin-bottom: 35px;
+    }
+
+    /* What I Do List */
+    .service-list {
+      list-style: none;
+    }
+
+    .service-list li {
+      margin-bottom: 15px;
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: #fff;
+    }
+
+    .service-list li span {
+      color: #00ff66;
+      font-weight: bold;
+    }
+
+    .hacker-bg-icon {
+      position: absolute;
+      right: 15px;
+      bottom: 15px;
+      opacity: 0.12;
+      font-size: 5.5rem;
+      color: #00ff66;
+    }
+
+    /* Skills Progress Bar */
+    .skill-bar {
+      margin-bottom: 15px;
+    }
+
+    .skill-info {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.9rem;
+      margin-bottom: 6px;
+    }
+
+    .progress-track {
+      width: 100%;
+      height: 10px;
+      background: #08210e;
+      border: 1px solid #00ff66;
+      border-radius: 3px;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: #00ff66;
+      box-shadow: 0 0 10px #00ff66;
+    }
+
+    /* Social Media Bottom Row */
+    .social-row-container {
+      border: 1px solid rgba(0, 255, 102, 0.4);
+      background: rgba(2, 12, 4, 0.85);
+      padding: 20px 30px;
+      border-radius: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+    }
+
+    .social-row-title {
+      font-size: 1.1rem;
+      font-weight: bold;
+      color: #00ff66;
+      text-shadow: 0 0 5px #00ff66;
+    }
+
+    .social-grid-row {
+      display: flex;
+      gap: 20px;
+    }
+
+    .social-btn {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border: 1px solid #00ff66;
+      padding: 10px 24px;
+      border-radius: 4px;
+      color: #00ff66;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 0.95rem;
+      transition: 0.3s;
+    }
+
+    .social-btn:hover {
+      background: #00ff66;
+      color: #000;
+      box-shadow: 0 0 15px #00ff66;
+      transform: translateY(-2px);
+    }
+
+    /* Footer */
+    footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 20px;
+      border-top: 1px solid rgba(0, 255, 102, 0.2);
+      font-size: 0.85rem;
+      color: #88c999;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Matrix Background Canvas -->
+  <canvas id="matrix"></canvas>
+
+  <div class="container">
+    
+    <!-- Top Navbar -->
+    <navbar id="home-section">
+      <a href="#home-section" class="brand-logo">&gt;_ SOLITARY HACKER</a>
+
+      <ul class="nav-links">
+        <li><a href="#home-section" class="active">HOME</a></li>
+        <li><a href="#about-section">ABOUT</a></li>
+        <li><a href="#services-section">SERVICES</a></li>
+        <li><a href="#skills-section">SKILLS</a></li>
+        <li><a href="#social-section">CONTACT</a></li>
+      </ul>
+
+      <a href="#social-section" class="btn-terminal">ACCESS TERMINAL</a>
+    </navbar>
+
+    <!-- Top Main Section Grid -->
+    <section class="hero-grid">
+      
+      <!-- Top Left: Big Image + Name/Title -->
+      <div class="profile-left-box">
+        <img src="profile.jpg" alt="Profile Picture" class="profile-img-large">
+        
+        <div class="hero-left-text">
+          <h2>I AM</h2>
+          <h1>RIMON ISLAM</h1>
+          <div class="hero-tags">&gt; Ethical Hacker | Developer</div>
+          
+          <div class="hero-buttons">
+            <a href="#services-section" class="btn-solid">PROJECTS</a>
+            <a href="#social-section" class="btn-outline">CONTACT &gt;_</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Top Right: About Me Box -->
+      <div class="card-box about-card-content" id="about-section">
+        <h3>&gt;_ ABOUT ME</h3>
+        <p>I'm a passionate ethical hacker and full stack developer. I love exploring systems, finding vulnerabilities, and building secure applications for the digital world.</p>
+        <a href="#social-section" class="btn-outline">CONTACT ME</a>
+      </div>
+
+    </section>
+
+    <!-- Middle Grid: What I Do (Left) & Skills (Right) -->
+    <section class="mid-grid">
+      
+      <!-- What I Do / Services (Bottom Left) -->
+      <div class="card-box" id="services-section">
+        <h3>&gt;_ WHAT I DO</h3>
+        <ul class="service-list">
+          <li><span>&gt;</span> Web Penetration Testing</li>
+          <li><span>&gt;</span> Network Security & Auditing</li>
+          <li><span>&gt;</span> Bug Bounty Hunting</li>
+          <li><span>&gt;</span> Full-Stack Web Development</li>
+          <li><span>&gt;</span> Telegram & Discord Bot Development</li>
+        </ul>
+        <i class="fa-solid fa-user-secret hacker-bg-icon"></i>
+      </div>
+
+      <!-- Skills (Bottom Right) -->
+      <div class="card-box" id="skills-section">
+        <h3>&gt;_ MY SKILLS</h3>
+        
+        <div class="skill-bar">
+          <div class="skill-info"><span>HTML / CSS / JS</span><span>90%</span></div>
+          <div class="progress-track"><div class="progress-fill" style="width: 90%;"></div></div>
+        </div>
+
+        <div class="skill-bar">
+          <div class="skill-info"><span>Python</span><span>85%</span></div>
+          <div class="progress-track"><div class="progress-fill" style="width: 85%;"></div></div>
+        </div>
+
+        <div class="skill-bar">
+          <div class="skill-info"><span>PHP & MySQL</span><span>80%</span></div>
+          <div class="progress-track"><div class="progress-fill" style="width: 80%;"></div></div>
+        </div>
+
+        <div class="skill-bar">
+          <div class="skill-info"><span>Linux System</span><span>90%</span></div>
+          <div class="progress-track"><div class="progress-fill" style="width: 90%;"></div></div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- Social Media Section Row -->
+    <section class="social-row-container" id="social-section">
+      <div class="social-row-title">&gt;_ CONNECT WITH ME:</div>
+      <div class="social-grid-row">
+        <a href="https://github.com/Solitary-King" target="_blank" class="social-btn"><i class="fa-brands fa-github"></i> GITHUB</a>
+        <a href="https://t.me/solitary_hacker" target="_blank" class="social-btn"><i class="fa-brands fa-telegram"></i> TELEGRAM CHANNEL</a>
+        <a href="https://www.facebook.com/share/1SMJnt9NFN/" target="_blank" class="social-btn"><i class="fa-brands fa-facebook-f"></i> FACEBOOK</a>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div>&gt;_ SOLITARY HACKER | Cyber Security Portfolio</div>
+      <div>© 2026 SOLITARY HACKER. All rights reserved.</div>
+      <div>LOCATION: Earth 🌍</div>
+    </footer>
+
+  </div>
+
+  <!-- Matrix Background Canvas JS -->
+  <script>
+    const canvas = document.getElementById('matrix');
+    const ctx = canvas.getContext('2d');
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    const chars = '01ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&*';
+    const fontSize = 15;
+    let columns = Math.floor(canvas.width / fontSize);
+    let drops = Array(columns).fill(1);
+
+    function drawMatrix() {
+      ctx.fillStyle = 'rgba(2, 8, 3, 0.1)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      ctx.fillStyle = '#00ff66';
+      ctx.font = fontSize + 'px monospace';
+
+      for (let i = 0; i < drops.length; i++) {
+        const text = chars.charAt(Math.floor(Math.random() * chars.length));
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+          drops[i] = 0;
+        }
+        drops[i]++;
+      }
+    }
+    setInterval(drawMatrix, 33);
+  </script>
+</body>
+</html>
